@@ -1,0 +1,59 @@
+{
+  "type": "bubble",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "แจ้งส่งต่อจาก ToBeNB-TeenCare",
+        "weight": "bold"
+      }
+    ]
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "User ID: {userId}"
+      },
+      {
+        "type": "text",
+        "text": "คะแนน: {score}"
+      },
+      {
+        "type": "text",
+        "text": "ระดับความเสี่ยง: {risk}"
+      },
+      {
+        "type": "text",
+        "text": "เหตุผล: {reason}",
+        "wrap": true
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "ติดต่อผู้เรียน",
+          "text": "ติดต่อผู้เรียน:{userId}"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "ปิดเคส",
+          "text": "ปิดเคส:{userId}"
+        }
+      }
+    ]
+  }
+}
