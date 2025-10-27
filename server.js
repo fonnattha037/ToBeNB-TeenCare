@@ -13,7 +13,7 @@ const config = {
   channelSecret: process.env.CHANNEL_SECRET
 };
 const client = new line.Client(config);
-const pool = new Pool({ connectionString: process.env.DATABASE_URL || '' });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL});
 
 const app = express();
 app.use(bodyParser.json());
@@ -66,7 +66,7 @@ async function saveScreening(userId, sessionId, answers, score, risk, consent) {
 const sessions = new Map();
 
 // Admin list (LINE userIds) - set in Render/Env
-const ADMIN_LINE_IDS = (process.env.ADMIN_LINE_IDS || '').split(',').filter(Boolean);
+const ADMIN_LINE_IDS = (process.env.ADMIN_LINE_IDS).split(',').filter(Boolean);
 
 app.get('/', (req, res) => {
   res.send('ToBeNB-TeenCare webhook is running. Configure /webhook as LINE webhook.');
