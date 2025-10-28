@@ -86,7 +86,21 @@ async function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') return null;
   const userId = event.source.userId;
   const text = event.message.text.trim();
-
+  
+if (/^(เริ่มใหม่|ทำอีกครั้ง|ประเมินใหม่)$/i.test(text)){
+  sessions.delete(userId);
+  sessions.set(userId, {
+    id: uuidv4(),
+    stage: 'consent',
+    answers: Array(9).fill(null),
+    qIndex: 0
+  });
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: 'เริ่มการประเมินใหม่ได้เลยครับ/ค่ะ พิมพ์ "ตกลง" เพื่อเริ่ม'
+  });
+}
+  
   if (!sessions.has(userId)) {
     sessions.set(userId, {
       id: uuidv4(),
@@ -161,7 +175,7 @@ async function handleEvent(event) {
     return client.replyMessage(event.replyToken, { type:'text', text: 'หากต้องการให้ส่งต่อให้ครูพิมพ์ \"ส่งต่อ\" หรือเลือกหัวข้อ: ครอบครัว/เรียน/ความรัก/เพื่อน/โซเชียล' });
   }
 
-  return client.replyMessage(event.replyToken, { type:'text', text: 'พิมพ์ \"เริ่ม\" เพื่อทำแบบคัดกรองอีกครั้ง' });
+  return client.replyMessage(event.replyToken, { type:'text', text: 'ต้องการประเมินใหม่ พิมพ์ "เริ่มใหม่" ได้เลย' });
 }
 
 // Build simple flex content for admin (dynamically)
